@@ -1,0 +1,15 @@
+li.drop-down {
+  position: relative;
+  .drop-active {
+    position: absolute;
+    inset: 0px auto auto 0px;
+    margin: 0px;
+    top: 0;
+    left: 0;
+    transform: translate(-8%, 18%);
+    @media (max-width: 767px) {
+      left: 50%;
+      transform: translate(-30%, 18%);
+    }
+  }
+}

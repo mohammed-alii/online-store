@@ -1,0 +1,26 @@
+.star-container {
+  list-style-type: none;
+  padding: 0;
+  display: inline-flex;
+}
+
+.star-item {
+  margin-right: 5px; /* Adjust as needed */
+}
+
+.star {
+  font-size: 24px; /* Adjust size as needed */
+  color: #888; /* Default star color */
+}
+
+.filled {
+  color: yellow; /* Filled star color */
+}
+
+.half-filled::before {
+  content: '★';
+  position: absolute;
+  overflow: hidden;
+  color: yellow;
+  width: 0.6%;
+}

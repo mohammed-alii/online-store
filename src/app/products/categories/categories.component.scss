@@ -1,0 +1,32 @@
+::ng-deep {
+  .owl-next {
+    position: absolute;
+    background: transparent !important;
+    font-size: 48px !important;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #c2410c !important;
+  }
+  .owl-prev {
+    position: absolute;
+    background: transparent !important;
+    font-size: 48px !important;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #c2410c !important;
+  }
+  .text-holder {
+    position: absolute;
+    top: 25%;
+    left: 25%;
+    transform: translate(-50%, -50%);
+  }
+  a.button {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
