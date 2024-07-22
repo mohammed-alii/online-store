@@ -42,6 +42,34 @@ img, picture, video, canvas, svg {
 */
 input, button, textarea, select {
   font: inherit;
+  appearance: none; /* For modern browsers */
+  -webkit-appearance: none; /* For Safari */
+  -moz-appearance: none; /* For Firefox */
+  background: none; /* Remove the default background */
+  &:focus {
+    outline: none;
+  }
+}
+.select-container {
+  position: relative;
+  display: inline-block;
+}
+
+/* Style the custom arrow */
+.select-container img {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  width: 10px !important;
+  color: #6b7280;
+}
+
+/* Apply styles to the select element */
+.select-container select {
+  width: 100%;
+  padding-right: 30px;
 }
 /*
   8. Avoid text overflows
@@ -54,4 +82,25 @@ p, h1, h2, h3, h4, h5, h6 {
 */
 #root, #__next {
   isolation: isolate;
+}
+
+
+// scroll bar
+
+::-webkit-scrollbar-corner {
+  background: #111827;
+}
+::-webkit-scrollbar {
+  width: 9px;
+  height: 9px;
+}
+::-webkit-scrollbar-track {
+  background: #111827;
+}
+::-webkit-scrollbar-thumb {
+  background: #3b558b;
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #293c64;
 }

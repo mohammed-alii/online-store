@@ -2,13 +2,12 @@ import { CarouselModule } from 'ngx-owl-carousel-o';
 import { FakeApiService } from './../../services/fake-api.service';
 import { Component, OnInit } from '@angular/core';
 import { OwlOptions } from 'ngx-owl-carousel-o';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-categories',
   standalone: true,
-  imports: [CarouselModule, FontAwesomeModule, RouterLink],
+  imports: [CarouselModule, RouterLink],
   templateUrl: './categories.component.html',
   styleUrl: './categories.component.scss',
 })

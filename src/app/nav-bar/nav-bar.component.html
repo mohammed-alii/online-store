@@ -1,6 +1,6 @@
 
 
-<nav class="bg-gray-200 border-gray-200 dark:bg-gray-900 dark:border-gray-700">
+<nav class="bg-gray-300 border-gray-200 dark:bg-gray-900 dark:border-gray-700">
   <div class="container flex flex-wrap items-center justify-between mx-auto p-4">
     <a routerLink="" class="flex items-center space-x-3 rtl:space-x-reverse">
         <img src="assets/imgs/logo.png" class="h-16" alt="Flowbite Logo" />
@@ -12,7 +12,7 @@
         </svg>
     </button>
     <div class="w-full md:block md:w-auto" id="navbar-dropdown" [ngClass]="navCollapse ? 'block' : 'hidden'">
-      <ul class="flex flex-col items-center font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-200 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-gray-200  dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+      <ul class="flex flex-col items-center font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-300 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-gray-300  dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
         <li>
           <a routerLink="" routerLinkActive="text-gray-700" [routerLinkActiveOptions]="{exact: true}"  class="block py-2 px-3 text-white bg-orange-700 rounded md:bg-transparent md:text-orange-700 md:p-0 md:dark:text-orange-500 dark:bg-orange-600 md:dark:bg-transparent" aria-current="page">Home</a>
         </li>
@@ -26,12 +26,12 @@
                 <ul class="py-2 text-sm text-gray-700 dark:text-gray-400" aria-labelledby="dropdownLargeButton">
                   @for (category of categories; track category) {
                     <li>
-                      <a [routerLink]="category" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">{{category}}</a>
+                      <a [routerLink]="['categories',category]" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">{{category}}</a>
                     </li>
                   }
                 </ul>
                 <div class="py-1">
-                  <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Sign out</a>
+                  <a class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white" (click)="SignOut()">Sign out</a>
                 </div>
             </div>
         </li>
@@ -39,16 +39,22 @@
           <a href="#" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-orange-700 md:p-0 dark:text-white md:dark:hover:text-orange-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Contact</a>
         </li>
         <li>
-          <a href="#" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-orange-700 md:p-0 dark:text-white md:dark:hover:text-orange-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Login</a>
+          @if (isLogged == 'true') {
+            <a [routerLink]="['users/', userId]" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-orange-700 md:p-0 dark:text-white md:dark:hover:text-orange-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent cursor-pointer"><img src="../../assets/imgs/boy.png" alt="" class="w-8"></a>
+          } @else {
+            <a class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-orange-700 md:p-0 dark:text-white md:dark:hover:text-orange-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent cursor-pointer" (click)="openModal()">Login</a>
+          }
         </li>
         <li>
-          <a href="#" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-orange-700 md:p-0 dark:text-white md:dark:hover:text-orange-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">
+          <a routerLink="cart" class="cart block py-2 px-3 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0  md:p-0 text-white ">
             <img src="../../assets/imgs/shopping-cart.png" alt="" class="w-6 dark:hidden">
             <img src="../../assets/imgs/shopping-cart-dark.png" alt="" class="w-6 hidden dark:block">
+            @if (cartCount > 0) {
+              <span class="bg-orange-700 rounded-full cart-count ">{{cartCount}}</span>
+            }
           </a>
         </li>
         <li (click)="toggleTheme()" class="cursor-pointer">
-
           @if (isDark) {
             <img src="../../assets/imgs/light.png" alt="" class="w-7">
           } @else {
@@ -60,7 +66,7 @@
   </div>
 </nav>
 
-<button >
 
 
-</button>
+
+

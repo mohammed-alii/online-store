@@ -4,43 +4,61 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { product } from '../models/product';
 import { CategoriesComponent } from '../products/categories/categories.component';
+import { SectionComponent } from './section/section.component';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, HttpClientModule, CategoriesComponent],
+  imports: [
+    CommonModule,
+    HttpClientModule,
+    CategoriesComponent,
+    SectionComponent,
+  ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
 })
 export class HomeComponent implements OnInit {
   allProducts: product[];
+  bestSellers: product[];
+  newArrivals: product[];
   constructor(private fakeApiService: FakeApiService) {
     this.allProducts = [];
+    this.bestSellers = [];
+    this.newArrivals = [];
   }
   ngOnInit(): void {
     this.getAllProducts();
-    this.getAllCategories();
   }
 
   getAllProducts() {
     this.fakeApiService.getAllProducts().subscribe({
       next: (res: product[]) => {
-        console.log(res);
         this.allProducts = res;
-      },
-      error: (err: HttpErrorResponse) => {
-        console.log(err);
-      },
+        this.getBestSellers(res)
+        this.getNewArrivals(res)
+      }
     });
   }
-  getAllCategories() {
-    this.fakeApiService.getAllCategories().subscribe({
-      next: (res: any) => {
-        console.log(res);
-      },
-      error: (err: HttpErrorResponse) => {
-        console.log(err);
-      },
-    });
+  getBestSellers(allProducts: product[]) :void {
+    this.bestSellers = this.randomizeFiveProducts(0, allProducts.length, allProducts);
+  }
+  getNewArrivals(allProducts: product[]): void {
+    this.newArrivals = this.randomizeFiveProducts(0, allProducts.length, allProducts);
+  }
+  randomizeFiveProducts(
+    min: number,
+    max: number,
+    allProducts: product[]
+  ) :product[] {
+    let selectedProducts: product[] = [];
+    for (let i = 1; i <= 5; i++) {
+      let product = allProducts[Math.floor(Math.random() * (max - min + 1) + min)]
+      if (product) {
+        selectedProducts.push(product);
+        console.log(selectedProducts)
+      }
+    }
+    return selectedProducts;
   }
 }

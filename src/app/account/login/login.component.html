@@ -1,0 +1,225 @@
+<!-- LOGIN -->
+@if (login) {
+  <div class="container mx-auto flex justify-center mt-2 h-4/5">
+    <form
+      action=""
+      class="flex flex-col items-center border-gray-200 w-2/3 rounded-xl justify-center"
+      [formGroup]="loginForm"
+    >
+
+    <h2 class="text-white mx-4 w-4/5">Login</h2>
+      <div class="input-wrapper m-4 w-4/5">
+        <input
+          type="text"
+          class="bg-transparent border border-gray-600 focus:border-orange-400 focus:w-full rounded-lg p-3 text-gray-50 w-full autofill:bg-black"
+          formControlName="email"
+          [ngClass]="loginForm.controls['email'].invalid && loginForm.controls['email'].dirty || loginError ? 'warning' : ''"
+        />
+        <span class="text-gray-500 label" [ngClass]="loginForm.controls['email'].value !== '' ? 'input-valued': ''">Email</span>
+        @if (loginForm.controls['email'].invalid && loginForm.controls['email'].dirty || loginError) {
+          <span class="warning">!</span>
+        }
+      </div>
+      <div class="input-wrapper m-4 w-4/5">
+        <input
+          [type]="pwType"
+          class="bg-transparent border border-gray-600 focus:border-orange-400 focus:w-full rounded-lg p-3 text-gray-50 w-full autofill:bg-transparent"
+          formControlName="password"
+          [ngClass]="loginForm.controls['password'].invalid && loginForm.controls['password'].dirty || loginError ? 'warning' : ''"
+        />
+        <img src="../../../assets/imgs/view.png" alt="" class="w-6" [ngClass]="pwType === 'password' ? '' : 'hidden'" (click)="changePasswordType('text')">
+        <img src="../../../assets/imgs/hide.png" alt="" class="w-6" [ngClass]="pwType === 'text' ? '' : 'hidden'" (click)="changePasswordType('password')">
+        <span class="text-gray-500 label" [ngClass]="loginForm.controls['password'].value !== '' ? 'input-valued': ''">Password</span>
+        @if (loginForm.controls['password'].invalid && loginForm.controls['password'].dirty || loginError) {
+          <span class="warning">!</span>
+        }
+      </div>
+      <button
+        class="text-white rounded-lg  focus:ring-2 focus:outline-none focus:ring-orange-300 bg-orange-700 hover:bg-orange-800 orange:ring-blue-800 py-2 mt-12 px-4 transition-all w-4/5 disabled:bg-gray-600 disabled:text-gray-400"
+        [disabled]="loginForm.invalid"
+        (click)="loginUser()"
+        >
+        Login
+      </button>
+      <p class="text-gray-500 mt-4">
+        Don't have an account?
+        <a
+          class="text-orange-700 cursor-pointer hover:text-orange-500 transition-all"
+          (click)="navToSignUpOne()"
+          >Sign up</a
+        >
+      </p>
+    </form>
+  </div>
+}
+
+<!-- LOGIN -->
+
+<!-- SIGN UP STEP 1 -->
+@if (signUpSlideOne) {
+  <div class="container mx-auto flex justify-center h-4/5">
+    <form
+      action=""
+      class="flex flex-col items-center border-gray-200 w-2/3 rounded-xl justify-center"
+      [formGroup]="registerFrom"
+    >
+    <h2 class="text-white mx-4 w-4/5">Register</h2>
+      <div class="input-wrapper m-4 w-4/5">
+        <input
+          type="text"
+          class="bg-transparent border border-gray-600 focus:border-orange-400 focus:w-full rounded-lg p-3 text-gray-50 w-full"
+          formControlName="first_name"
+          [ngClass]="registerFrom.controls['first_name'].invalid && registerFrom.controls['first_name'].dirty || loginError ? 'warning' : ''"
+        />
+        <span class="text-gray-500 whitespace-nowrap label" [ngClass]="registerFrom.controls['first_name'].value !== '' ? 'input-valued': ''">First Name</span>
+        @if (registerFrom.controls['first_name'].invalid && registerFrom.controls['first_name'].dirty || loginError) {
+          <span class="warning">!</span>
+        }
+      </div>
+      <div class="input-wrapper m-4 w-4/5">
+        <input
+          type="text"
+          class="bg-transparent border border-gray-600 focus:border-orange-400 focus:w-full rounded-lg p-3 text-gray-50 w-full"
+          formControlName="last_name"
+          [ngClass]="registerFrom.controls['last_name'].invalid && registerFrom.controls['last_name'].dirty || loginError ? 'warning' : ''"
+        />
+        <span class="text-gray-500 whitespace-nowrap label" [ngClass]="registerFrom.controls['first_name'].value !== '' ? 'input-valued': ''">Last Name</span>
+        @if (registerFrom.controls['last_name'].invalid && registerFrom.controls['last_name'].dirty || loginError) {
+          <span class="warning">!</span>
+        }
+      </div>
+      <span class="whitespace-nowrap text-gray-100">Date of Birth</span>
+      <div class="input-wrapper m-4 w-4/5 flex">
+        <div class="select-container w-2/4 mr-4">
+          <select
+            name=""
+            class="bg-transparent border border-gray-600 focus:border-orange-400 focus:w-full rounded-lg p-3 text-gray-50 w-full"
+            formControlName="month"
+            >
+            @for (month of months; track month) {
+            <option [value]="month" class="bg-black active:bg-black focus:bg-black">
+              {{ month }}
+            </option>
+            }
+          </select>
+          <span class="text-gray-500 whitespace-nowrap label">Month</span>
+          <img src="../../../assets/imgs/chevron-down.png" alt="" />
+        </div>
+        <div class="select-container w-1/4 mr-4">
+          <select
+            name=""
+            class="bg-transparent border border-gray-600 focus:border-orange-400 focus:w-full rounded-lg p-3 text-gray-50 w-full"
+            formControlName="day"
+            >
+            @for (day of days; track day) {
+            <option [value]="day" class="bg-black">{{ day }}</option>
+            }
+          </select>
+          <span class="text-gray-500 whitespace-nowrap label">Day</span>
+          <img src="../../../assets/imgs/chevron-down.png" alt="" />
+        </div>
+        <div class="select-container w-1/4">
+          <select
+            name=""
+            class="bg-transparent border border-gray-600 focus:border-orange-400 focus:w-full rounded-lg p-3 text-gray-50 w-full"
+            formControlName="year"
+            >
+            @for (year of years; track year) {
+            <option [value]="year" class="bg-black active:bg-black">{{ year }}</option>
+            }
+          </select>
+          <span class="text-gray-500 whitespace-nowrap label">Year</span>
+          <img src="../../../assets/imgs/chevron-down.png" alt="" />
+        </div>
+      </div>
+      <button
+        class="text-white rounded-lg focus:ring-2 focus:outline-none focus:ring-orange-300 bg-orange-700 hover:bg-orange-800 orange:ring-blue-800 py-2 mt-12 px-4 transition-all w-4/5 disabled:bg-gray-600 disabled:text-gray-400"
+        (click)="navToSignUpTwo()"
+        [disabled]="registerFrom.controls['first_name'].invalid || registerFrom.controls['last_name'].invalid || registerFrom.controls['day'].invalid || registerFrom.controls['month'].invalid || registerFrom.controls['year'].invalid"
+      >
+      Next
+      </button>
+      <p class="text-gray-500 mt-4">
+        Already have an account?
+        <a
+        class="text-orange-700 cursor-pointer hover:text-orange-500 transition-all"
+        (click)="navToLogin()"
+          >Login</a
+          >
+        </p>
+      </form>
+  </div>
+}
+
+<!-- SIGN UP STEP 1 -->
+
+
+<!-- SIGN UP STEP 2 -->
+
+@if (signUpSlideTwo) {
+  <div class="container mx-auto flex justify-center mt-2 h-4/5">
+    <form
+      action=""
+      class="flex flex-col items-center border-gray-200 w-2/3 rounded-xl justify-center"
+      [formGroup]="registerFrom"
+    >
+      <div class="input-wrapper m-4 w-4/5">
+        <input
+          type="text"
+          class="bg-transparent border border-gray-600 focus:border-orange-400 focus:w-full rounded-lg p-3 text-gray-50 w-full"
+          formControlName="email"
+          [ngClass]="registerFrom.controls['email'].invalid && registerFrom.controls['email'].dirty || loginError ? 'warning' : ''"
+        />
+        <span class="text-gray-500 whitespace-nowrap label"[ngClass]="registerFrom.controls['email'].value !== '' ? 'input-valued': ''">Email Address</span>
+        @if (registerFrom.controls['email'].invalid && registerFrom.controls['email'].dirty || registerError) {
+          <span class="warning">!</span>
+        }
+      </div>
+      <div class="input-wrapper m-4 w-4/5">
+        <input
+          [type]="pwType"
+          class="bg-transparent border border-gray-600 focus:border-orange-400 focus:w-full rounded-lg p-3 text-gray-50 w-full"
+          formControlName="password"
+          [ngClass]="registerFrom.controls['password'].invalid && registerFrom.controls['password'].dirty ? 'warning' : ''"
+        />
+        <img src="../../../assets/imgs/view.png" alt="" class="w-6" [ngClass]="pwType === 'password' ? '' : 'hidden'" (click)="changePasswordType('text')">
+        <img src="../../../assets/imgs/hide.png" alt="" class="w-6" [ngClass]="pwType === 'text' ? '' : 'hidden'" (click)="changePasswordType('password')">
+        <span class="text-gray-500 label" [ngClass]="registerFrom.controls['password'].value !== '' ? 'input-valued': ''">Password</span>
+        @if (registerFrom.controls['password'].invalid && registerFrom.controls['password'].dirty) {
+          <span class="warning">!</span>
+        }
+      </div>
+      <div class="input-wrapper m-4 w-4/5">
+        <input
+          [type]="pwType"
+          class="bg-transparent border border-gray-600 focus:border-orange-400 focus:w-full rounded-lg p-3 text-gray-50 w-full"
+          formControlName="confirm_password"
+          [ngClass]="registerFrom.controls['confirm_password'].invalid && registerFrom.controls['confirm_password'].dirty ? 'warning' : ''"
+        />
+        <img src="../../../assets/imgs/view.png" alt="" class="w-6" [ngClass]="pwType === 'password' ? '' : 'hidden'" (click)="changePasswordType('text')">
+        <img src="../../../assets/imgs/hide.png" alt="" class="w-6" [ngClass]="pwType === 'text' ? '' : 'hidden'" (click)="changePasswordType('password')">
+        <span class="text-gray-500 whitespace-nowrap label" [ngClass]="registerFrom.controls['confirm_password'].value !== '' ? 'input-valued': ''">Confirm Password</span>
+        @if (registerFrom.controls['confirm_password'].invalid && registerFrom.controls['confirm_password'].dirty || registerFrom.get('confirm_password')?.errors?.['passwordMismatch'] && registerFrom.get('confirmPassword')?.touched) {
+          <span class="warning">!</span>
+        }
+      </div>
+      <button
+        class="text-white rounded-lg  focus:ring-2 focus:outline-none focus:ring-orange-300 bg-orange-700 hover:bg-orange-800 orange:ring-blue-800 py-2 mt-12 px-4 transition-all w-4/5 disabled:bg-gray-600 disabled:text-gray-400"
+        (click)="register()"
+        [disabled]="registerFrom.invalid"
+        >
+        Create Account
+      </button>
+      <p class="text-gray-500 mt-4">
+        Don't have an account?
+        <a
+          class="text-orange-700 cursor-pointer hover:text-orange-500 transition-all"
+          (click)="navToSignUpOne()"
+          >Sign up</a
+        >
+      </p>
+    </form>
+  </div>
+}
+
+<!-- SIGN UP STEP 2 -->

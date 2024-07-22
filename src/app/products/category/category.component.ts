@@ -1,14 +1,13 @@
-import { CartService } from './../../services/cart.service';
 import { Component, OnInit } from '@angular/core';
 import { product } from '../../models/product';
 import { FakeApiService } from './../../services/fake-api.service';
 import { ActivatedRoute, RouterLink } from '@angular/router';
-import { cartObj } from '../../models/cart-obj';
+import { ProductCardComponent } from '../product-card/product-card.component';
 
 @Component({
   selector: 'app-category',
   standalone: true,
-  imports: [RouterLink],
+  imports: [RouterLink, ProductCardComponent],
   templateUrl: './category.component.html',
   styleUrl: './category.component.scss',
 })
@@ -17,8 +16,7 @@ export class CategoryComponent implements OnInit {
   categoryProducts: product[];
   constructor(
     private fakeApiService: FakeApiService,
-    private route: ActivatedRoute,
-    private cartService: CartService
+    private route: ActivatedRoute
   ) {
     this.category = this.route.snapshot.paramMap.get('id');
     this.categoryProducts = [];
@@ -38,10 +36,5 @@ export class CategoryComponent implements OnInit {
         this.categoryProducts = res;
       },
     });
-  }
-  addToCart(product: product) {
-    let _cartObj: cartObj = product;
-    _cartObj.quantity = 1
-    this.cartService.cartUpdater(_cartObj)
   }
 }

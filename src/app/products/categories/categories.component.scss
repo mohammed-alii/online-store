@@ -22,11 +22,44 @@
     top: 25%;
     left: 25%;
     transform: translate(-50%, -50%);
+    @media (max-width: 1025px) {
+      position: absolute;
+      top: 44%;
+      left: 38%;
+      transform: translate(-50%, -50%);
+    }
   }
   a.button {
     position: absolute;
     top: 50%;
-    left: 50%;
+    left: 25%;
     transform: translate(-50%, -50%);
+    @media (max-width: 1025px) {
+      position: absolute;
+      top: 70%;
+      left: 60%;
+      transform: translate(100%, -25%);
+    }
+    @media (max-width: 600px) {
+      top: 85%;
+      left: 0;
+    }
+  }
+}
+
+img {
+  display: block !important;
+  width: 100% !important;
+}
+img.mobile {
+  display: none !important;
+  @media(max-width: 600px) {
+    display: block !important;
+  }
+}
+img.big-screen {
+  display: block !important;
+  @media(max-width: 600px) {
+    display: none !important;
   }
 }

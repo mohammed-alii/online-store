@@ -1,0 +1,23 @@
+<div class="bg-gray-300 dark:bg-gray-900 mt-12 dark:text-gray-50">
+  <div class="container mx-auto flex items-center justify-around py-10">
+    <ul>
+      <li><a routerLink=""><img src="../../assets/imgs/logo.png" alt="" class="h-16"></a></li>
+      <li>16501 Collins Ave, Sunny Isles Beach, <br> FL 33160, United States</li>
+      <li>Muhammed.ali002.io{{'@'}}gmail.com</li>
+      <li>011-4485-0671 </li>
+    </ul>
+    <ul>
+      <li>Shopping & Categories</li>
+      @for (category of categories; track category) {
+        <li><a [routerLink]="category" routerLinkActive="router-link-active" >{{category}}</a></li>
+      }
+    </ul>
+    <ul>
+      <li>Useful Links</li>
+      <li><a href="">Login</a></li>
+      <li><a href="">Contact Us</a></li>
+      <li><a href=""></a></li>
+      <li><a href=""></a></li>
+    </ul>
+  </div>
+</div>

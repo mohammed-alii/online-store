@@ -13,3 +13,19 @@ li.drop-down {
     }
   }
 }
+.cart {
+  position: relative;
+  .cart-count {
+    position: absolute;
+      width: 20px;
+      height: 20px;
+      text-align: center;
+      top: 0;
+      right: 0;
+      transform: translate(35%, -35%);
+      font-size: 12px;
+      @media (max-width: 767px) {
+        transform: translate(-8%, -8%);
+      }
+  }
+}

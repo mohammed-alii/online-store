@@ -1,0 +1,14 @@
+<div class="container mx-auto my-12">
+  <div class="m-8">
+    <h2 class="text-xl font-semibold text-orange-700 border-b-orange-900 border-b-2 inline-block">{{name}}</h2>
+  </div>
+  <owl-carousel-o [options]="customOptions">
+
+    @for (product of products; track product.id) {
+      <ng-template carouselSlide>
+        <app-product-card [product]="product"></app-product-card>
+      </ng-template>
+    }
+
+  </owl-carousel-o>
+</div>

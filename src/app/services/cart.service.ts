@@ -18,20 +18,28 @@ export class CartService {
       let parsedData = JSON.parse(existingData);
 
       if (typeof parsedData === typeof []) {
-
         for (let i = 0; i < parsedData.length; i++) {
           this.finalData.push(parsedData[i]);
         }
       } else this.finalData.push(parsedData);
 
-      this.finalData.push(data);window.localStorage.setItem('cartItems', JSON.stringify(this.mergeDuplicates(this.finalData))
+      this.finalData.push(data);
+
+      window.localStorage.setItem(
+        'cartItems',
+        JSON.stringify(this.mergeDuplicates(this.finalData))
       );
     } else {
       this.finalData.push(data);
       window.localStorage.setItem('cartItems', JSON.stringify([data]));
     }
   }
-
+  reAssignCartData(data: any) {
+    window.localStorage.setItem(
+      'cartItems',
+      JSON.stringify(this.mergeDuplicates(data))
+    );
+  }
   mergeDuplicates(dataArray: cartObj[]): cartObj[] {
     const uniqueItems: { [key: number]: cartObj } = {};
     dataArray.forEach((item) => {
